@@ -29,6 +29,7 @@ type SessionState struct {
 	Email             string   `msgpack:"e,omitempty"`
 	User              string   `msgpack:"u,omitempty"`
 	Groups            []string `msgpack:"g,omitempty"`
+	GroupsDirect      []string `msgpack:"gd,omitempty"`
 	Role              string   `msgpack:"r,omitempty"`
 	PreferredUsername string   `msgpack:"pu,omitempty"`
 
@@ -153,6 +154,10 @@ func (s *SessionState) GetClaim(claim string) []string {
 		groups := make([]string, len(s.Groups))
 		copy(groups, s.Groups)
 		return groups
+	case "groups_direct":
+		groupsDirect := make([]string, len(s.GroupsDirect))
+		copy(groupsDirect, s.GroupsDirect)
+		return groupsDirect
 	case "preferred_username":
 		return []string{s.PreferredUsername}
 	default:

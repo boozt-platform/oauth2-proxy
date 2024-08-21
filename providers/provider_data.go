@@ -262,6 +262,7 @@ func (p *ProviderData) buildSessionFromClaims(rawIDToken, accessToken string) (*
 		{"preferred_username", &ss.PreferredUsername},
 		{"name", &ss.Name},
 		{"role", &ss.Role},
+		{"groups_direct", &ss.GroupsDirect},
 	} {
 		if _, err := extractor.GetClaimInto(c.claim, c.dst); err != nil {
 			return nil, err

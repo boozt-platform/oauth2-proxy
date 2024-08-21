@@ -144,12 +144,15 @@ func (p *GitLabProvider) EnrichSession(ctx context.Context, s *sessions.SessionS
 	if len(userinfo.Groups) > 0 {
 		s.Groups = userinfo.Groups
 	}
+	if len(userinfo.GroupsDirect) > 0 {
+		s.GroupsDirect = userinfo.GroupsDirect
+	}
 	if userinfo.Name != "" {
 		s.User = userinfo.Name
 	}
 
 	// Set the user role based on the groups
-	s.Role = p.getUserRole(s.Groups)
+	s.Role = p.getUserRole(s.GroupsDirect)
 
 	// Add projects as `project:blah` to s.Groups
 	p.addProjectsToSession(ctx, s)
@@ -162,6 +165,7 @@ type gitlabUserinfo struct {
 	Email         string   `json:"email"`
 	EmailVerified bool     `json:"email_verified"`
 	Groups        []string `json:"groups"`
+	GroupsDirect  []string `json:"groups_direct"`
 	Name          string   `json:"name"`
 }
 
@@ -302,7 +306,8 @@ func (p *GitLabProvider) RefreshSession(ctx context.Context, s *sessions.Session
 		s.Name = name
 		s.Groups = append(s.Groups, projects...)
 		s.Groups = deduplicateGroups(s.Groups)
-		s.Role = p.getUserRole(s.Groups)
+		s.GroupsDirect = deduplicateGroups(s.GroupsDirect)
+		s.Role = p.getUserRole(s.GroupsDirect)
 	}
 	return refreshed, err
 }
