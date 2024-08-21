@@ -178,8 +178,8 @@ func (p *GitLabProvider) getUserRole(groups []string) string {
 			return "admin"
 		}
 
-		// if the user has rundeck-users group then return user role
-		if slices.Contains(groups, "boozt/users/rundeck-users") {
+		// if the user has rundeck-editors group then return user role
+		if slices.Contains(groups, "boozt/users/rundeck-editors") {
 			return "user"
 		}
 	}
