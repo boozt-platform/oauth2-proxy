@@ -25,11 +25,11 @@ type SessionState struct {
 	Nonce []byte `msgpack:"n,omitempty"`
 
 	// UserInfo
-	Name 			  string   `msgpack:"un,omitempty"`
+	Name              string   `msgpack:"un,omitempty"`
 	Email             string   `msgpack:"e,omitempty"`
 	User              string   `msgpack:"u,omitempty"`
 	Groups            []string `msgpack:"g,omitempty"`
-	Role 			  string   `msgpack:"r,omitempty"`
+	Role              string   `msgpack:"r,omitempty"`
 	PreferredUsername string   `msgpack:"pu,omitempty"`
 
 	// Internal helpers, not serialized
