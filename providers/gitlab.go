@@ -175,17 +175,17 @@ func (p *GitLabProvider) getUserRole(groups []string) string {
 	if len(groups) > 0 {
 		// by the priority first check if the user has rundeck-admins group
 		if slices.Contains(groups, "boozt/users/rundeck-admins") {
-			return "admin"
+			return "admin,user"
 		}
 
 		// if the user has rundeck-editors group then return user role
 		if slices.Contains(groups, "boozt/users/rundeck-editors") {
-			return "user"
+			return "dev,user"
 		}
 	}
 
 	// user has no any of the above groups then return viewer role
-	return "viewer"
+	return "viewer,user"
 }
 
 func (p *GitLabProvider) getUserinfo(ctx context.Context, s *sessions.SessionState) (*gitlabUserinfo, error) {
