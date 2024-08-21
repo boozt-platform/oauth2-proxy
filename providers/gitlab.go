@@ -162,7 +162,7 @@ type gitlabUserinfo struct {
 	Email         string   `json:"email"`
 	EmailVerified bool     `json:"email_verified"`
 	Groups        []string `json:"groups"`
-	Name		  string   `json:"name"`
+	Name          string   `json:"name"`
 }
 
 // function to check if the certain groups contains in the list of groups
